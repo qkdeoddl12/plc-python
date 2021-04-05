@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "C:\\Users\\GoodusSmartSolution\\AppData\\Local\\Programs\\Python\\Python38\\python.exe",
+    "python.pythonPath": "C:\\Users\\Eric-woo\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
     "sqltools.connections": [
         {
             "mysqlOptions": {
@@ -7,9 +7,9 @@
             },
             "previewLimit": 50,
             "server": "localhost",
-            "port": 3307,
+            "port": 3306,
             "driver": "MariaDB",
-            "name": "plc-server",
+            "name": "plc-python",
             "database": "plc",
             "username": "root",
             "password": "fmbdb12#$"
