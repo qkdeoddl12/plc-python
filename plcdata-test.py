@@ -8,8 +8,7 @@ mydb = mysql.connector.connect(
     host = "localhost",
     user = "root", 
     password = "fmbdb12#$",
-    database = "plc",
-    port="3307"
+    database = "plc"
 )
 
 port_list=[
@@ -66,47 +65,45 @@ def getPLCdata(ip,startAddr):
          print("error입니다.")
          return 'error'
 
+    for plc_data in plc_list: 
+            print(plc_data)
+            for port_data in port_list:
+                print(port_data['addr'])
+                #result=getPLCdata(plc_data[2],port_data['addr'])
+                result=1
+                print(result)
+                if result!='error' :
+                        sql = "INSERT INTO plc_log (createTime, value,code_name,address,unit_id) VALUES (substring(date_format(now(6),'%y%m%d%H%i%s%f'),1,14), '"+str(result)+"','"+str(port_data['name'])+"','"+str(port_data['addr'])+"','"+str(plc_data[0])+"')"
+                elif result=='error' :
+                        sql = "INSERT INTO plc_log (createTime, value,code_name) VALUES (substring(date_format(now(6),'%y%m%d%H%i%s%f'),1,14), 'error','connection_fail')"
+                print(sql)
+                mycursor.execute(sql)
+                mydb.commit()
+                print(mycursor, "record inserted")
     
-    
 
 
+    while True:
+        for plc_data in plc_list: 
+            print(plc_data)
+            for port_data in port_list:
+                print(port_data['addr'])
+                #result=getPLCdata(plc_data[2],port_data['addr'])
+                result=1
+                print(result)
+                if result!='error' :
+                        sql = "INSERT INTO plc_log (createTime, value,code_name,address,unit_id) VALUES (substring(date_format(now(6),'%y%m%d%H%i%s%f'),1,14), '"+str(result)+"','"+str(port_data['name'])+"','"+str(port_data['addr'])+"','"+str(plc_data[0])+"')"
+                elif result=='error' :
+                        sql = "INSERT INTO plc_log (createTime, value,code_name) VALUES (substring(date_format(now(6),'%y%m%d%H%i%s%f'),1,14), 'error','connection_fail')"
+                print(sql)
+                mycursor.execute(sql)
+                mydb.commit()
+                print(mycursor, "record inserted")
+        time.sleep(1)
 
-for plc_data in plc_list: 
-      print(plc_data)
-      for port_data in port_list:
-          print(port_data['addr'])
-          #result=getPLCdata(plc_data[2],port_data['addr'])
-          result=1
-          print(result)
-          if result!='error' :
-                sql = "INSERT INTO plc_log (createTime, value,code_name,address,unit_id) VALUES (substring(date_format(now(6),'%y%m%d%H%i%s%f'),1,14), "+str(result)+",'"+port_data['name']+",'"+port_data['addr']+","+plc_data[0]+")"
-          elif result=='error' :
-                sql = "INSERT INTO plc_log (createTime, value,code_name) VALUES (substring(date_format(now(6),'%y%m%d%H%i%s%f'),1,14), 'error','connection_fail')"
-          print(sql)
                      
     
 
 
 
 
-
-""" while True:
-    test1=getPLCdata('192.168.1.10',1100)
-    test2=getPLCdata('192.168.1.10',1101)
-    test3=getPLCdata('192.168.1.10',1102)
-    
-    sql = "INSERT INTO plc_log (createTime, val) VALUES (substring(date_format(now(6),'%y%m%d%H%i%s%f'),1,14), "+str(test1)+")"
-                     
-    #         INSERT INTO plc_log
-	#(createTime, code, address, unit_id, value)
-	#VALUES (0, '', 0, 0, 0)
-    
-    mycursor.execute(sql)
-    mydb.commit()
-    print(mycursor, "record inserted")
-    print(test1)
-    print(test2)
-    print(test3)
-    time.sleep(1) """
-
-    
